@@ -3,7 +3,7 @@ const express = require("express");
 const errorController = require("./controllers/error.controller");
 const userRoutes = require("./routes/user");
 
-const mongoConnect = require("./utils/database");
+const { mongoConnect } = require("./utils/database");
 
 const app = express();
 
@@ -13,7 +13,6 @@ app.use(express.json());
 app.use("/users", userRoutes);
 app.use(errorController.get404);
 
-mongoConnect((client) => {
-  console.log(client);
+mongoConnect(() => {
   app.listen(3000);
 });
