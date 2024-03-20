@@ -1,5 +1,10 @@
 const express = require("express");
 
+const mongoConnect = require("./utils/database");
+
 const app = express();
 
-app.listen(3000);
+mongoConnect((client) => {
+  console.log(client);
+  app.listen(3000);
+});
