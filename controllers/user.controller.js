@@ -1,0 +1,5 @@
+exports.all = (req, res, next) => {
+  res.status(200).json({
+    message: "All users",
+  });
+};
