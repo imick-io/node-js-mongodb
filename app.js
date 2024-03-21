@@ -1,4 +1,5 @@
 const express = require("express");
+const { port } = require("./config");
 
 const errorController = require("./controllers/error.controller");
 const userRoutes = require("./routes/user");
@@ -14,5 +15,5 @@ app.use("/users", userRoutes);
 app.use(errorController.get404);
 
 mongoConnect(() => {
-  app.listen(3000);
+  app.listen(port);
 });

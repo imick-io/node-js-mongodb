@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const { getDb } = require("../utils/database");
 
 class User {
@@ -6,16 +7,22 @@ class User {
     this.email = email;
   }
 
+  static get(id) {
+    const db = getDb();
+    return db
+      .collection("users")
+      .find({ _id: new ObjectId(String(id)) })
+      .next();
+  }
+
+  static all() {
+    const db = getDb();
+    return db.collection("users").find().toArray();
+  }
+
   create() {
     const db = getDb();
-    db.collection("users")
-      .insertOne(this)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    return db.collection("users").insertOne(this);
   }
 }
 

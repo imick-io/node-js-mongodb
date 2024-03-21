@@ -1,12 +1,12 @@
 const mongodb = require("mongodb");
+const { mongoUri } = require("../config");
+
 const MongoClient = mongodb.MongoClient;
 
 let _db;
 
 const mongoConnect = (cb) => {
-  MongoClient.connect(
-    `mongodb+srv://${process.env.MONGODB_ATLAS_USERNAME}:${process.env.MONGODB_ATLAS_PASSWORD}@nodejs-academind.bewdbrp.mongodb.net/?retryWrites=true&w=majority&appName=${process.env.MONGODB_ATLAS_DBNAME}`
-  )
+  MongoClient.connect(mongoUri)
     .then((client) => {
       console.log("Connected!");
       _db = client.db("nodejs-academind");
